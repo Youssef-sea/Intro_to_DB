@@ -1,49 +1,49 @@
 -- alx_book_store.sql
 
--- Create the database if it does not already exist
-CREATE DATABASE IF NOT EXISTS alx_book_store;
+-- create the database if it does not already exist
+create database if not exists alx_book_store;
 
--- Use the newly created database
-USE alx_book_store;
+-- use the newly created database
+use alx_book_store;
 
--- Create the Authors table
-CREATE TABLE Authors (
-    AUTHOR_ID INT PRIMARY KEY,
-    AUTHOR_NAME VARCHAR(215) NOT NULL
+-- create the authors table
+create table Authors (
+    author_id int primary key,
+    author_name varchar(215) not null
 );
 
--- Create the Books table with a foreign key to the Authors table
-CREATE TABLE Books (
-    BOOK_ID INT PRIMARY KEY,
-    TITLE VARCHAR(130) NOT NULL,
-    AUTHOR_ID INT,
-    PRICE DOUBLE NOT NULL,
-    PUBLICATION_DATE DATE,
-    FOREIGN KEY (AUTHOR_ID) REFERENCES Authors(AUTHOR_ID)
+-- create the books table with a foreign key to the authors table
+create table Books (
+    book_id int primary key,
+    title varchar(130) not null,
+    author_id int,
+    price double not null,
+    publication_date date,
+    foreign key (author_id) references Authors(author_id)
 );
 
--- Create the Customers table
-CREATE TABLE Customers (
-    CUSTOMER_ID INT PRIMARY KEY,
-    CUSTOMER_NAME VARCHAR(215) NOT NULL,
-    EMAIL VARCHAR(215) NOT NULL UNIQUE,
-    ADDRESS TEXT
+-- create the Customers table
+create table customers (
+    customer_id int primary key,
+    customer_name varchar(215) not null,
+    email varchar(215) not null unique,
+    address text
 );
 
--- Create the Orders table with a foreign key to the Customers table
-CREATE TABLE Orders (
-    ORDER_ID INT PRIMARY KEY,
-    CUSTOMER_ID INT,
-    ORDER_DATE DATE NOT NULL,
-    FOREIGN KEY (CUSTOMER_ID) REFERENCES Customers(CUSTOMER_ID)
+-- create the orders table with a foreign key to the customers table
+create table Orders (
+    order_id int primary key,
+    customer_id int,
+    order_date date not null,
+    foreign key (customer_id) references Customers(customer_id)
 );
 
--- Create the Order_Detail table with foreign keys to the Orders and Books tables
-CREATE TABLE Order_Detail (
-    ORDERDETAILID INT PRIMARY KEY,
-    ORDER_ID INT,
-    BOOK_ID INT,
-    QUANTITY DOUBLE NOT NULL,
-    FOREIGN KEY (ORDER_ID) REFERENCES Orders(ORDER_ID),
-    FOREIGN KEY (BOOK_ID) REFERENCES Books(BOOK_ID)
+-- create the order_details table with foreign keys to the orders and books tables
+create table Order_Details (
+    orderdetailid int primary key,
+    order_id int,
+    book_id int,
+    quantity double not null,
+    foreign key (order_id) references Orders(order_id),
+    foreign key (book_id) references Books(book_id)
 );
