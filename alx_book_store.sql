@@ -26,7 +26,7 @@ CREATE TABLE Customers (
     customer_id INT PRIMARY KEY,
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215) NOT NULL UNIQUE,
-    address text
+    address TEXT
 );
 
 -- create the orders table with a foreign key to the customers table
